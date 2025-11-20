@@ -1,0 +1,77 @@
+EXCERCISE-2
+
+Setting Up   Jenkins Email Notification Setup (Using Gmail with App Password)
+Creation of app password
+1. Gmail: Enable App Password (for 2-Step Verification)
+i. Go to: https://myaccount.google.com
+ii. Enable 2-Step Verification
+•	Navigate to:
+o	Security → 2-Step Verification
+o	Turn it ON
+o	Complete the OTP verification process (via phone/email)
+iii. Generate App Password for Jenkins
+•	Go to:
+o	Security → App passwords
+•	Select:
+o	App: Other (Custom name)
+o	Name: Jenkins-Demo
+•	Click Generate
+•	Copy the 16-digit app password
+o	Save it in a secure location (e.g., Notepad)
+                 2.  Jenkins Plugin Installation
+i. Open Jenkins Dashboard
+ii. Navigate to:
+•	Manage Jenkins → Manage Plugins
+iii. Install Plugin:
+•	Search for and install:
+o	Email Extension Plugin
+________________________________________
+3. Configure Jenkins Global Email Settings
+i. Go to:
+•	Manage Jenkins → Configure System
+________________________________________
+A. E-mail Notification Section
+Field	Value
+SMTP Server	smtp.gmail.com
+Use SMTP Auth	✅ Enabled
+User Name	Your Gmail ID (e.g., archanareddykmit@gmail.com)
+Password	Paste the 16-digit App Password
+Use SSL	✅ Enabled
+SMTP Port	465
+Reply-To Address	Your Gmail ID (same as above)
+➤ Test Configuration
+•	Click: Test configuration by sending test e-mail
+•	Provide a valid email address to receive a test mail
+•	✅ Should receive email from Jenkins
+________________________________________
+B. Extended E-mail Notification Section
+Field	Value
+SMTP Server	smtp.gmail.com
+SMTP Port	465
+Use SSL	✅ Enabled
+Credentials	Add Gmail ID and App Password as Jenkins credentials
+Default Content Type	text/html or leave default
+Default Recipients	Leave empty or provide default emails
+Triggers	Select as per needs (e.g., Failure)
+________________________________________
+4.  Configure Email Notifications for a Jenkins Job
+i. Go to:
+•	Jenkins → Select a Job → Configure
+________________________________________
+ii. In the Post-build Actions section:
+•	Click: Add post-build action → Editable Email Notification
+A. Fill in the fields:
+Field	Value
+Project Recipient List	Add recipient email addresses (comma-separated)
+Content Type	Default (text/plain) or text/html
+Triggers	Select events (e.g., Failure, Success, etc.)
+Attachments	(Optional) Add logs, reports, etc.
+________________________________________
+iii. Click Save
+________________________________________
+ Now your Jenkins job is set up to send email notifications based on the build status!
+ 	________________________________________
+Takeaway :
+Students learned how to integrate Jenkins with GitHub using webhooks to automate build triggers and configure email notifications to monitor build success or failure effectively.
+
+
