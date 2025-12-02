@@ -223,3 +223,26 @@ services:
       MYSQL_DATABASE: mydb
     ports:
       - "3306:3306"
+**********************nagios
+# Check Docker
+docker --version
+docker ps
+
+# 1. Pull Nagios image
+docker pull jasonrivers/nagios:latest
+
+# 2. Run Nagios container
+docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+
+# 3. Open in browser
+# http://localhost:8888
+# Login → username: nagiosadmin , password: nagios
+
+# 4. Stop Nagios container
+docker stop nagiosdemo
+
+# 5. Remove container
+docker rm nagiosdemo
+
+# 6. Remove image
+docker rmi jasonrivers/nagios:latest
