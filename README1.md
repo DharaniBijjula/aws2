@@ -116,4 +116,50 @@ docker run -dp 9090:80 --name mynginx nginx:latest
 
 # Step 4: Verify container is running
 docker ps
+*****************************************************************************************************
+
+#docker compose stps
+# 1️⃣ Create a project folder and move into it
+mkdir docker-activity
+cd docker-activity
+
+# 2️⃣ Create a Dockerfile
+nano Dockerfile
+# Add the following content in Dockerfile:
+# ----------------------------------------
+# FROM ubuntu:latest
+# RUN apt update && apt install -y curl
+# CMD ["bash"]
+# ----------------------------------------
+# Save and exit (Ctrl+O, Enter, Ctrl+X)
+
+# 3️⃣ Build the Docker image
+docker build -t myubuntuimage .
+
+# 4️⃣ Check if image is created
+docker images
+
+# 5️⃣ Create a Docker Compose file
+nano docker-compose.yml
+# Add the following content:
+# ----------------------------------------
+# version: "3.8"
+#
+# services:
+#   app1:
+#     image: myubuntuimage
+#     container_name: app1
+#   app2:
+#     image: myubuntuimage
+#     container_name: app2
+# ----------------------------------------
+# Save and exit (Ctrl+O, Enter, Ctrl+X)
+
+# 6️⃣ Run Docker Compose
+docker-compose up -d
+
+# 7️⃣ Check running containers
+docker ps
+
+# ✅ You should see both containers (app1 and app2) running
 
