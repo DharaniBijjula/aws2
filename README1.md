@@ -104,3 +104,16 @@ pipeline {
         }
     }
 }
+Dokcer cli commands to open nginx
+# Step 1: Remove old container if exists
+docker rm -f mynginx
+
+# Step 2: Pull latest Nginx image
+docker pull nginx:latest
+
+# Step 3: Run Nginx container on host port 9090
+docker run -dp 9090:80 --name mynginx nginx:latest
+
+# Step 4: Verify container is running
+docker ps
+
