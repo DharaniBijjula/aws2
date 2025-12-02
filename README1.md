@@ -163,3 +163,63 @@ docker ps
 
 # ✅ You should see both containers (app1 and app2) running
 
+
+********************docker compose for wordporess and mysql
+services:
+  wordpress: # Wordpress service
+    image: wordpress:latest
+    ports:
+      - "9080:80" # Map port 80 of the container to port 9080 of the host
+    environment:
+      WORDPRESS_DB_HOST: db:3306 # Database host
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - db # Ensures the db service starts first
+
+  db: # MySQL service
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+*****************
+docker compose for flask 
+A. Python Code (app.py)
+This is the source code for the Flask application:
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def home():
+    return "Hello from 24BD5A0503- NEKSHASRINIVAS"
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+B. Dockerfile
+This Dockerfile defines how the Flask application image (web service) should be built:
+FROM python:3.10-slim
+WORKDIR /app
+COPY app.py /app/
+RUN pip install flask
+CMD ["python", "app.py"]
+C. Flask/MySQL docker-compose.yml
+This compose file defines two services: web (the Flask application, which is built locally) and db (the MySQL database):
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    ports:
+      - "3306:3306"
